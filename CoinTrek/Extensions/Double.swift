@@ -83,8 +83,8 @@ extension Double {
 //        formatter.locale = .current // default value
         formatter.currencyCode = "usd" // change the currency
         formatter.currencySymbol = "$" // change the currency symbol
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 0
+        formatter.minimumFractionDigits = 2
+        formatter.maximumFractionDigits = 6
         return formatter
     }
     

@@ -20,25 +20,40 @@ struct HomeView: View {
                 .ignoresSafeArea()
             
             
+
+            
             // Content Layer
-            VStack{
+            VStack(){
                 homeHeader
                 
-                HStack{
-                    Text("Coins")
-                    Spacer()
-                    Text("Holdings")
-                    Text("Price")
-                        .frame(width: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
-                }
-                .font(.caption)
-                .padding(.horizontal)
+        
                 
                 if !showPortfolio{
+                    HStack(spacing: 3){
+                        Text("All")
+                            .fontWeight(.semibold)
+                        
+                        Text("Coins")
+                        
+                        Spacer()
+                    }
+                    .font(.system(size: 17))
+                    .padding(.horizontal)
+                    
                     allCoinsList
                         .transition(.move(edge: .leading))
                 }
                 if showPortfolio{
+                    HStack(spacing: 3){
+                        Text("Your")
+                            .fontWeight(.semibold)
+                        
+                        Text("Assets")
+                        
+                        Spacer()
+                    }
+                    .font(.system(size: 17))
+                    .padding(.horizontal)
                     portfolioCoinsList
                         .transition(.move(edge: .trailing))
                 }
@@ -59,7 +74,7 @@ struct HomeView_Previews: PreviewProvider {
         NavigationView{
             HomeView()
         }
-        .environmentObject(dev.homeVM)
+        .environmentObject(HomeVM())
         .toolbar(.hidden)
         
     }
@@ -99,7 +114,7 @@ extension HomeView{
     private var allCoinsList: some View{
         List{
             ForEach(vm.allCoins){ coin in
-                CoinRowView(coin: DeveloperPreview.instance.coin, showHoldingColumn: false)
+                CoinRowView(coin: coin, showHoldingColumn: false)
                     .listRowInsets(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
             }
         }
@@ -107,12 +122,13 @@ extension HomeView{
         .scrollContentBackground(.hidden)
         .background(Color.clear)
         .padding(.horizontal, 10)
+        .listRowSpacing(7)
     }
     
     private var portfolioCoinsList: some View{
         List{
             ForEach(vm.portfolioCoins){ coin in
-                CoinRowView(coin: DeveloperPreview.instance.coin, showHoldingColumn: true)
+                CoinRowView(coin: coin, showHoldingColumn: true)
                     .listRowInsets(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
             }
         }
@@ -120,5 +136,6 @@ extension HomeView{
         .scrollContentBackground(.hidden)
         .background(Color.clear)
         .padding(.horizontal, 10)
+        .listRowSpacing(7)
     }
 }

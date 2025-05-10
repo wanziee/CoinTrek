@@ -15,9 +15,9 @@ struct CoinRowView: View {
         HStack(spacing: 0){
             leftColumn
             Spacer()
-            if showHoldingColumn{
-                centerColumn
-            }
+//            if showHoldingColumn{
+//                centerColumn
+//            }
             
             rightColumn
         }
@@ -34,7 +34,6 @@ struct CoinRowView: View {
 
 struct CoinRowView_Previews: PreviewProvider {
     static var previews: some View {
-        //        CoinRowView(coin: dev.coin, showHoldingColumn: true)
         HomeView()
             .environmentObject(HomeVM())
     }
@@ -45,11 +44,15 @@ extension CoinRowView{
     
     private var leftColumn: some View{
         HStack(spacing: 0){
-            ZStack(alignment: .leading){
+ 
                 
                 
                 HStack(){
-                    Circle()
+                    Text("\(coin.rank)")
+                        .font(.caption)
+                        .foregroundStyle(Color.theme.secondaryText)
+                        .frame(minWidth: 20)
+                    CoinImageView(coin: coin)
                         .frame(width: 50, height: 50)
                     VStack(alignment: .leading){
                         Text(coin.symbol.uppercased())
@@ -64,45 +67,39 @@ extension CoinRowView{
                     .padding(.leading, 6)
                 }
                 
-                Circle()
-                    .frame(width: 15, height: 15)
-                    .foregroundStyle(Color.background)
-                    .overlay(
-                        Text("\(coin.rank)")
-                            .font(.system(size: 10))
-                            .foregroundStyle(Color.theme.text)
-                    )
-                    .position(x: 10, y: 15)
-            }
+                
+
         }
     }
     
-    private var centerColumn: some View{
-        VStack(alignment: .trailing){
-            Text(coin.currentHoldingsValue.formattedCurrencyWithSmallerFraction2())
-                .bold()
-                .font(.system(size: 20))
-
-                
-            Text((coin.currentHoldings ?? 0 ).asNumberString())
-        }
-        .foregroundStyle(Color.theme.text)
-    }
+//    private var centerColumn: some View{
+//        VStack(alignment: .trailing){
+//            Text(coin.currentHoldingsValue.asCurrencyWith6Decimals())
+//                .bold()
+//                .font(.system(size: 20))
+//
+//                
+//            Text((coin.currentHoldings ?? 0 ).asNumberString())
+//        }
+//        .foregroundStyle(Color.theme.text)
+//    }
     
     private var rightColumn: some View{
         
         //actual price
         VStack(alignment: .trailing){
-            Text(coin.currentPrice.formattedCurrencyWithSmallerFraction())
+            Text(showHoldingColumn ? coin.currentHoldingsValue.asCurrencyWith6Decimals() : coin.currentPrice.asCurrencyWith6Decimals())
                 .bold()
                 .font(.system(size: 20))
                 .foregroundStyle(Color.theme.text)
-            Text(coin.priceChangePercentage24H?.asPercentString() ?? "")
+            Text(showHoldingColumn ? (coin.currentHoldings ?? 0).asNumberString() : coin.priceChangePercentage24H?.asPercentString() ?? "")
+                .font(.caption)
                 .foregroundStyle(
                     (coin.priceChangePercentage24H ?? 0) >= 0 ? Color.theme.greenColor : Color.theme.redColor
                 )
         }
-        .frame(width: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
+        .frame(alignment: .trailing)
+//        .frame(width: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
 
         
     }
