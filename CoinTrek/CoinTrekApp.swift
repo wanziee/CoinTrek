@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct CoinTrekApp: App {
+    
+    @StateObject private var vm = HomeVM()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView{
+                HomeView()
+            }
+            .environmentObject(vm)
         }
     }
 }
