@@ -53,7 +53,7 @@ extension CoinRowView{
                         .foregroundStyle(Color.theme.secondaryText)
                         .frame(minWidth: 20)
                     CoinImageView(coin: coin)
-                        .frame(width: 50, height: 50)
+                        .frame(width: 45, height: 45)
                     VStack(alignment: .leading){
                         Text(coin.symbol.uppercased())
                             .font(.system(size: 20))
@@ -90,7 +90,7 @@ extension CoinRowView{
         VStack(alignment: .trailing){
             Text(showHoldingColumn ? coin.currentHoldingsValue.asCurrencyWith6Decimals() : coin.currentPrice.asCurrencyWith6Decimals())
                 .bold()
-                .font(.system(size: 20))
+                .font(.subheadline)
                 .foregroundStyle(Color.theme.text)
             Text(showHoldingColumn ? (coin.currentHoldings ?? 0).asNumberString() : coin.priceChangePercentage24H?.asPercentString() ?? "")
                 .font(.caption)

@@ -26,6 +26,7 @@ struct HomeView: View {
             VStack(){
                 homeHeader
                 
+                SearchBarView(searchText: $vm.searchText)
         
                 
                 if !showPortfolio{
@@ -39,6 +40,7 @@ struct HomeView: View {
                     }
                     .font(.system(size: 17))
                     .padding(.horizontal)
+
                     
                     allCoinsList
                         .transition(.move(edge: .leading))
@@ -54,6 +56,8 @@ struct HomeView: View {
                     }
                     .font(.system(size: 17))
                     .padding(.horizontal)
+
+                    
                     portfolioCoinsList
                         .transition(.move(edge: .trailing))
                 }
