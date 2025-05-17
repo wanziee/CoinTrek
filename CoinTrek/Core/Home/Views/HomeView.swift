@@ -26,6 +26,8 @@ struct HomeView: View {
             VStack(){
                 homeHeader
                 
+                HomeStatsView(showPortfolio: $showPortfolio)
+                
                 SearchBarView(searchText: $vm.searchText)
         
                 
@@ -45,6 +47,8 @@ struct HomeView: View {
                     allCoinsList
                         .transition(.move(edge: .leading))
                 }
+                
+                
                 if showPortfolio{
                     HStack(spacing: 3){
                         Text("Your")
@@ -73,6 +77,9 @@ struct HomeView: View {
     }
 }
 
+
+
+//preview
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
@@ -82,11 +89,10 @@ struct HomeView_Previews: PreviewProvider {
         .toolbar(.hidden)
         
     }
-    
-    
-    
 }
 
+
+// homeview extension
 extension HomeView{
     private var homeHeader: some View{
         HStack{
