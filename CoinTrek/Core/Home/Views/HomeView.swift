@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject private var vm: HomeVM
     @State private var showPortfolio: Bool = false
+    @State private var showPortfolioView: Bool = false
     
     
     var body: some View {
@@ -18,6 +19,10 @@ struct HomeView: View {
             Image("HomeBackground")
                 .resizable()
                 .ignoresSafeArea()
+                .sheet(isPresented: $showPortfolioView) {
+                    PortfolioView()
+                        .environmentObject(vm)
+                }
             
             
 
@@ -40,6 +45,7 @@ struct HomeView: View {
                         
                         Spacer()
                     }
+                    .foregroundStyle(Color.theme.text)
                     .font(.system(size: 17))
                     .padding(.horizontal)
 
@@ -58,6 +64,7 @@ struct HomeView: View {
                         
                         Spacer()
                     }
+                    .foregroundStyle(Color.theme.text)
                     .font(.system(size: 17))
                     .padding(.horizontal)
 
@@ -101,6 +108,11 @@ extension HomeView{
                 .background(
                     CircleButtonAnimationView(animate: $showPortfolio)
                 )
+                .onTapGesture {
+                    if showPortfolio {
+                        showPortfolioView.toggle()
+                    }
+                }
             
             Spacer()
             Text(showPortfolio ? "Portfolio" : "Live Prices")

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StatisticView: View {
     
-    let stat: Statistics
+    let stat: Statistic
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4){
@@ -18,7 +18,7 @@ struct StatisticView: View {
                 .foregroundStyle(Color.theme.secondaryText)
             Text(stat.value)
                 .font(.headline)
-            HStack {
+            HStack (spacing: 4){
                 Image(systemName: "triangle.fill")
                     .font(.caption2)
                     .rotationEffect(Angle(degrees: (stat.percentageChange ?? 0) >= 0 ? 0 : 180))
@@ -37,8 +37,6 @@ struct Statistic_Previews: PreviewProvider {
     static var previews: some View{
         Group{
             StatisticView(stat: dev.state1)
-            StatisticView(stat: dev.state2)
-            StatisticView(stat: dev.state3)
             
         }
         

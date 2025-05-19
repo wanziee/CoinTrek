@@ -15,7 +15,9 @@ struct SearchBarView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(Color.theme.secondaryText)
             
+
             TextField("Search by name or symbol...", text: $searchText)
+                .foregroundStyle(Color.theme.text)
                 .overlay(
                     Image(systemName: "xmark.circle.fill")
                         .padding(.vertical)
@@ -29,6 +31,7 @@ struct SearchBarView: View {
                     ,alignment: .trailing
                 )
         }
+        .foregroundStyle(Color.theme.text)
         .font(.headline)
         .padding()
         .background(
@@ -41,5 +44,6 @@ struct SearchBarView: View {
 }
 
 #Preview {
-    SearchBarView(searchText: .constant(""))
+    HomeView()
+        .environmentObject(HomeVM())
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeStatsView: View {
     @EnvironmentObject private var vm: HomeVM
     @Binding var showPortfolio: Bool
-    
+
     var body: some View {
         HStack{
             ForEach(vm.statistics) {stat in
@@ -28,7 +28,7 @@ struct HomeStatsView_Previews: PreviewProvider {
     static var previews: some View{
         Group{
             HomeStatsView(showPortfolio: .constant(false))
-                .environmentObject(HomeVM())
+                .environmentObject(dev.homeVM)
             
         }
         
