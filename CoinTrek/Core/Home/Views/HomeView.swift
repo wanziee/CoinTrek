@@ -101,6 +101,7 @@ struct HomeView_Previews: PreviewProvider {
 
 // homeview extension
 extension HomeView{
+    
     private var homeHeader: some View{
         HStack{
             CircleButtonView(iconName: showPortfolio ? "plus" : "info")
@@ -128,10 +129,10 @@ extension HomeView{
                         
                     }
                 }
-            
         }
         .padding(.horizontal)
     }
+    
     
     private var allCoinsList: some View{
         List{
